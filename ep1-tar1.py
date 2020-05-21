@@ -1,3 +1,9 @@
+#!/usr/bin/env python
+# encoding: utf-8
+"""
+Creado por: Gustavo Quintero
+email: gustavoquintero9105@gmail.com
+"""
 import numpy as np
 import matplotlib.pyplot as plt
 
