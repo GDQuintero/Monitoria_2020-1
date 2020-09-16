@@ -7,17 +7,18 @@ email: gustavoquintero9105@gmail.com
 import numpy as np
 import matplotlib.pyplot as plt
 
-N = input("Escreve N: ")
-item = input("Qual teste deseja fazer (1: Item a errado, 2: Item a certo, 3: Item b ou 4: Item c) ")
+N = int(input("Escreve N: "))
+item = int(input("Qual teste deseja fazer (1: Item a errado, 2: Item a certo, 3: Item b ou 4: Item c) "))
 
 dx = 1.0 / N
 
-lam = 0.25; dt = lam*(dx**2); T = 1; M = 1 / dt; M = int(np.ceil(M))
+lam = 0.5; dt = lam*(dx**2); T = 1; M = 1 / dt; M = int(np.ceil(M))
 
 x = np.linspace(0.0, 1.0, N+1); t = np.linspace(0.0, 1.0, M+1)
 
 uold = np.zeros(N+1); A = np.zeros((11,N+1)); aux = np.zeros(N+1)
 
+graf = [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
 
 "============================================================="
 "DEFINICAO DAS FUNCOES A SEREM USADAS"
@@ -41,7 +42,7 @@ def f(t,x,item):
 	elif item == 2:
 		return (10.0 * np.cos(10.0 * t) * (x**2) * ((1.0 - x)**2)) - ((1.0 + np.sin(10.0 * t)) * ((12.0 * (x**2)) - 12.0*x + 2.0))
 	elif item == 3:
-		return np.exp(t - x) * ((25.0 * (t**2) * np.cos(5.0 * t * x)) + (10.0 * t * np.sin(5.0 * t * x)) - (5.0 * x * np.sin(5.0 * t * x)))
+		return np.exp(t - x) * ((25.0 * (t**2) * np.cos(5.0 * t * x)) - (10.0 * t * np.sin(5.0 * t * x)) - (5.0 * x * np.sin(5.0 * t * x)))
 	else:
 		return r(t) * g(x, aux, dx, 0.25)
 
@@ -109,7 +110,7 @@ for k in range(M):
 
 for i in range(11):
 	tk = 0.1*i
-	plt.plot(x,A[i,:],label='t = ' + str(tk))
+	plt.plot(x,A[i,:],label='t = ' + str(graf[i]))
 
 if item == 4:
 	exata = uold
@@ -122,9 +123,10 @@ erro = np.max(np.abs(uold - exata))
 plt.xlabel('Barra')
 plt.ylabel('Temperatura')
 plt.legend()
-plt.show()
+#plt.show()
 
-print(erro)
+#print(erro)
+print(uold)
 
 
 
